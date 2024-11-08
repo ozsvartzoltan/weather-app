@@ -1,6 +1,8 @@
 import { Input } from "@nextui-org/input";
 import { SearchIcon } from "@/components/icons";
 import { useState, useEffect } from "react";
+import { config } from "process";
+import { siteConfig } from "@/config/site";
 
 interface Location {
   id: number;
@@ -18,6 +20,7 @@ interface LocationSearchProps {
   setLoading: (value: boolean) => void;
   shouldFetch: boolean;
   setShouldFetch: (value: boolean) => void;
+  setCity: (value: Location) => void;
 }
 
 export default function LocationSearch({
@@ -29,12 +32,13 @@ export default function LocationSearch({
   setLoading,
   shouldFetch,
   setShouldFetch,
+  setCity,
 }: LocationSearchProps) {
   useEffect(() => {
     if (shouldFetch && search.length > 2) {
       setLoading(true);
       fetch(
-        `https://api.weatherapi.com/v1/search.json?key=6da08b5b980045bfadb121929240711&q=${search}&lang=en`,
+        `https://api.weatherapi.com/v1/search.json?key=${siteConfig.API_key}&q=${search}&lang=en`,
         {
           method: "GET",
           headers: {
@@ -86,6 +90,7 @@ export default function LocationSearch({
                 className="p-1 rounded-2xl hover:bg-default-200 my-1 cursor-pointer px-4"
                 onClick={() => {
                   console.log(location);
+                  setCity(location);
                   setSearch(location.name);
                   setSuggestions([]);
                   setShouldFetch(false);

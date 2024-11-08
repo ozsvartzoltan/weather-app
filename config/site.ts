@@ -67,3 +67,13 @@ export const siteConfig = {
   },
   API_key: "6da08b5b980045bfadb121929240711",
 };
+
+export const daysOfWeek = {
+  0: "Sunday",
+  1: "Monday",
+  2: "Tuesday",
+  3: "Wednesday",
+  4: "Thursday",
+  5: "Friday",
+  6: "Saturday",
+};
