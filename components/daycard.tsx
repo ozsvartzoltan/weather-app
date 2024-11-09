@@ -15,6 +15,16 @@ export default function DayCard({ day }: DayCardProps) {
 
     console.log(day.date);
   }, []);
+
+  function convertToMilitaryTime(timestr: string) {
+    let [time, ampm] = timestr.split(" ");
+    let [hour, min] = time.split(":");
+    ampm == "PM"
+      ? (hour = String(parseInt(hour) + 12))
+      : (hour = String(parseInt(hour)));
+    return `${hour}:${min}`;
+  }
+
   return (
     <div>
       <Card className="py-4">
@@ -22,25 +32,26 @@ export default function DayCard({ day }: DayCardProps) {
           <h1 className="text-large font-bold">
             {daysOfWeek[new Date(day.date).getDay()]}
           </h1>
+          <small>{day.date}</small>
           <div className="flex flex-col gap-2">
-            <div className="flex ">
+            <div className="flex justify-center">
               <div>
-                <span className="text-sm font-medium">Min </span>
-                <span className="text-blue-700">{day.day.mintemp_c}°C</span>
+                <span className="text-sm font-medium">min </span>
+                <span className="text-blue-600">{day.day.mintemp_c}°C</span>
               </div>
               <div>
-                <span className="text-sm font-medium">Max </span>
-                <span className="text-red-700">{day.day.maxtemp_c}°C</span>
+                <span className="text-sm font-medium">max </span>
+                <span className="text-red-600">{day.day.maxtemp_c}°C</span>
               </div>
             </div>
-            <div className="flex">
+            <div className="flex flex-row justify-center space-x-4">
               <div>
                 <SunRiseIcon />
-                {day.astro.sunrise}
+                {convertToMilitaryTime(day.astro.sunrise)}
               </div>
               <div>
                 <SunSetIcon />
-                {day.astro.sunset}
+                {convertToMilitaryTime(day.astro.sunset)}
               </div>
             </div>
           </div>
