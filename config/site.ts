@@ -77,3 +77,12 @@ export const daysOfWeek = {
   5: "Friday",
   6: "Saturday",
 };
+
+export function convertToMilitaryTime(timestr: string) {
+  let [time, ampm] = timestr.split(" ");
+  let [hour, min] = time.split(":");
+  ampm == "PM"
+    ? (hour = String(parseInt(hour) + 12))
+    : (hour = String(parseInt(hour)));
+  return `${hour}:${min}`;
+}

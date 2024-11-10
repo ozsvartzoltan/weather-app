@@ -1,36 +1,31 @@
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 import { useEffect } from "react";
 import { Image } from "@nextui-org/image";
-import { daysOfWeek } from "@/config/site";
+import { convertToMilitaryTime, daysOfWeek } from "@/config/site";
 import { SunRiseIcon, SunSetIcon } from "./icons";
 
 interface DayCardProps {
   day: any;
+  setDayData: (value: any) => void;
+  onOpen: () => void;
 }
 
-export default function DayCard({ day }: DayCardProps) {
-  useEffect(() => {
-    console.log(day);
-    console.log(new Date(day.date).getDay());
-
-    console.log(day.date);
-  }, []);
-
-  function convertToMilitaryTime(timestr: string) {
-    let [time, ampm] = timestr.split(" ");
-    let [hour, min] = time.split(":");
-    ampm == "PM"
-      ? (hour = String(parseInt(hour) + 12))
-      : (hour = String(parseInt(hour)));
-    return `${hour}:${min}`;
+export default function DayCard({ day, setDayData, onOpen }: DayCardProps) {
+  function handleCardClick() {
+    setDayData(day);
+    onOpen();
   }
 
   return (
     <div>
-      <Card className="py-4">
+      <Card className="py-4" isPressable onPress={handleCardClick}>
         <CardHeader className="pb-0 pt-2 px-4 flex-col justify-center">
           <h1 className="text-large font-bold">
-            {daysOfWeek[new Date(day.date).getDay()]}
+            {
+              daysOfWeek[
+                new Date(day.date).getDay() as 0 | 1 | 2 | 3 | 4 | 5 | 6
+              ]
+            }
           </h1>
           <small>{day.date}</small>
           <div className="flex flex-col gap-2">
