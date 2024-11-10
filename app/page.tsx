@@ -12,6 +12,7 @@ import {
   useDisclosure,
 } from "@nextui-org/modal";
 import { Button } from "@nextui-org/button";
+import { Image } from "@nextui-org/image";
 
 interface Location {
   id: number;
@@ -94,13 +95,13 @@ export default function Home() {
           {(handleModelClose) => (
             <>
               <ModalHeader className="flex justify-center pb-2">
-                {dayData.date}
+                {dayData?.date}
               </ModalHeader>
               <ModalBody className="pt-0">
-                <p className="flex justify-center">
+                <p className="flex justify-center text-lg font-semibold mb-4">
                   {
                     daysOfWeek[
-                      new Date(dayData.date).getDay() as
+                      new Date(dayData?.date).getDay() as
                         | 0
                         | 1
                         | 2
@@ -111,24 +112,28 @@ export default function Home() {
                     ]
                   }
                 </p>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar risus non risus hendrerit venenatis.
-                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar risus non risus hendrerit venenatis.
-                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
-                <p>
-                  Magna exercitation reprehenderit magna aute tempor cupidatat
-                  consequat elit dolor adipisicing. Mollit dolor eiusmod sunt ex
-                  incididunt cillum quis. Velit duis sit officia eiusmod Lorem
-                  aliqua enim laboris do dolor eiusmod. Et mollit incididunt
-                  nisi consectetur esse laborum eiusmod pariatur proident Lorem
-                  eiusmod et. Culpa deserunt nostrud ad veniam.
-                </p>
+                <div className="flex overflow-x-auto gap-4">
+                  {dayData?.hour?.map((hour: any, index: number) => (
+                    <div
+                      key={index}
+                      className="flex flex-col items-center p-3 rounded-md shadow-sm min-w-[100px]"
+                    >
+                      <Image
+                        src={hour.condition.icon}
+                        alt={hour.condition.text}
+                        width={32}
+                        height={32}
+                        className="rounded-full mb-2"
+                      />
+                      <span className="font-medium mb-1">
+                        {convertToMilitaryTime(hour.time.split(" ")[1])}
+                      </span>
+                      <span className="text-blue-600 font-bold">
+                        {hour.temp_c}°C
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </ModalBody>
               <ModalFooter>
                 <Button
