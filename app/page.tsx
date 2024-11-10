@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { Button } from "@nextui-org/button";
 import {
   Modal,
   ModalContent,
@@ -8,7 +9,6 @@ import {
   ModalFooter,
   useDisclosure,
 } from "@nextui-org/modal";
-import { Button } from "@nextui-org/button";
 import { Image } from "@nextui-org/image";
 import DayCards from "@/components/daycards";
 import LocationSearch from "@/components/locationsearch";
@@ -42,14 +42,12 @@ export default function Home() {
           },
         }
       )
-        .then((response) => {
-          return response.json();
-        })
+        .then((response) => response.json())
         .then((data) => {
           setData(data);
         })
         .catch((e) => {
-          console.log(e);
+          console.error(e);
         });
     }
   }, [city]);
@@ -60,7 +58,7 @@ export default function Home() {
   }
 
   return (
-    <section className="flex flex-col items-center justify-center gap-4 py-8 ">
+    <section className="flex flex-col items-center justify-center gap-4 py-8">
       <LocationSearch
         loading={loading}
         search={search}
@@ -92,11 +90,11 @@ export default function Home() {
         <ModalContent>
           {(handleModelClose) => (
             <>
-              <ModalHeader className="flex justify-center pb-2 text-2xl font-bold">
+              <ModalHeader className="flex justify-center pb-2 text-2xl font-bold ">
                 {dayData?.date}
               </ModalHeader>
               <ModalBody className="pt-0">
-                <p className="flex justify-center text-xl font-semibold  mb-6">
+                <p className="flex justify-center text-xl font-semibold mb-6">
                   {
                     daysOfWeek[
                       new Date(dayData?.date).getDay() as
