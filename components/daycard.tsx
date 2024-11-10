@@ -1,5 +1,4 @@
-import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
-import { useEffect } from "react";
+import { Card, CardHeader, CardBody } from "@nextui-org/card";
 import { Image } from "@nextui-org/image";
 import { convertToMilitaryTime, daysOfWeek } from "@/config/site";
 import { SunRiseIcon, SunSetIcon } from "./icons";

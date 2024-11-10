@@ -1,13 +1,7 @@
 import Link from "next/link";
-import {
-  GithubIcon,
-  DiscordIcon,
-  LinkedInIcon,
-  SearchIcon,
-  WeatherIcon,
-} from "@/components/icons";
-import { siteConfig } from "@/config/site";
 import { Divider } from "@nextui-org/divider";
+import { GithubIcon, DiscordIcon, LinkedInIcon } from "@/components/icons";
+import { siteConfig } from "@/config/site";
 
 export default function Footer() {
   return (

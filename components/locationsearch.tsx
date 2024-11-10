@@ -1,7 +1,6 @@
 import { Input } from "@nextui-org/input";
+import { useEffect } from "react";
 import { SearchIcon } from "@/components/icons";
-import { useState, useEffect } from "react";
-import { config } from "process";
 import { siteConfig } from "@/config/site";
 
 interface Location {
@@ -89,7 +88,6 @@ export default function LocationSearch({
                 key={location.id}
                 className="p-1 rounded-2xl hover:bg-default-200 my-1 cursor-pointer px-4"
                 onClick={() => {
-                  console.log(location);
                   setCity(location);
                   setSearch(location.name);
                   setSuggestions([]);

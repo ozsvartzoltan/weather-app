@@ -1,7 +1,4 @@
 "use client";
-import DayCards from "@/components/daycards";
-import LocationSearch from "@/components/locationsearch";
-import { convertToMilitaryTime, daysOfWeek, siteConfig } from "@/config/site";
 import { useState, useEffect } from "react";
 import {
   Modal,
@@ -13,6 +10,9 @@ import {
 } from "@nextui-org/modal";
 import { Button } from "@nextui-org/button";
 import { Image } from "@nextui-org/image";
+import DayCards from "@/components/daycards";
+import LocationSearch from "@/components/locationsearch";
+import { convertToMilitaryTime, daysOfWeek, siteConfig } from "@/config/site";
 
 interface Location {
   id: number;
@@ -55,8 +55,6 @@ export default function Home() {
   }, [city]);
 
   function handleModelClose() {
-    console.log(dayData);
-
     onOpenChange();
     setDayData(null);
   }
@@ -64,15 +62,15 @@ export default function Home() {
   return (
     <section className="flex flex-col items-center justify-center gap-4 py-8 ">
       <LocationSearch
-        search={search}
-        setSearch={setSearch}
-        suggestions={suggestions}
-        setSuggestions={setSuggestions}
         loading={loading}
-        setLoading={setLoading}
-        shouldFetch={shouldFetch}
-        setShouldFetch={setShouldFetch}
+        search={search}
         setCity={setCity}
+        setLoading={setLoading}
+        setSearch={setSearch}
+        setShouldFetch={setShouldFetch}
+        setSuggestions={setSuggestions}
+        shouldFetch={shouldFetch}
+        suggestions={suggestions}
       />
       {data && (
         <DayCards
@@ -94,11 +92,11 @@ export default function Home() {
         <ModalContent>
           {(handleModelClose) => (
             <>
-              <ModalHeader className="flex justify-center pb-2">
+              <ModalHeader className="flex justify-center pb-2 text-2xl font-bold">
                 {dayData?.date}
               </ModalHeader>
               <ModalBody className="pt-0">
-                <p className="flex justify-center text-lg font-semibold mb-4">
+                <p className="flex justify-center text-xl font-semibold  mb-6">
                   {
                     daysOfWeek[
                       new Date(dayData?.date).getDay() as
@@ -112,34 +110,35 @@ export default function Home() {
                     ]
                   }
                 </p>
-                <div className="flex overflow-x-auto gap-4">
+                <div className="flex overflow-x-auto gap-6">
                   {dayData?.hour?.map((hour: any, index: number) => (
                     <div
                       key={index}
-                      className="flex flex-col items-center p-3 rounded-md shadow-sm min-w-[100px]"
+                      className="flex flex-col items-center bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg shadow-lg min-w-[120px] transform transition-transform hover:scale-105 hover:shadow-xl"
                     >
                       <Image
                         src={hour.condition.icon}
                         alt={hour.condition.text}
-                        width={32}
-                        height={32}
-                        className="rounded-full mb-2"
+                        width={40}
+                        height={40}
+                        className="rounded-full mb-3"
                       />
-                      <span className="font-medium mb-1">
+                      <span className="font-medium text-lg text-gray-800 mb-1">
                         {convertToMilitaryTime(hour.time.split(" ")[1])}
                       </span>
-                      <span className="text-blue-600 font-bold">
+                      <span className="text-blue-600 font-bold text-xl">
                         {hour.temp_c}°C
                       </span>
                     </div>
                   ))}
                 </div>
               </ModalBody>
-              <ModalFooter>
+              <ModalFooter className="flex justify-center">
                 <Button
-                  color="danger"
-                  variant="light"
+                  color="primary"
+                  variant="ghost"
                   onPress={handleModelClose}
+                  className="hover:bg-blue-100 transition-colors"
                 >
                   Close
                 </Button>
