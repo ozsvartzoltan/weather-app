@@ -78,23 +78,15 @@ export default function Home() {
         />
       )}
 
-      <Modal
-        backdrop="opaque"
-        isOpen={isOpen}
-        onOpenChange={handleModelClose}
-        classNames={{
-          backdrop:
-            "bg-gradient-to-t from-zinc-900 to-zinc-900/10 backdrop-opacity-20",
-        }}
-      >
+      <Modal isOpen={isOpen} onOpenChange={handleModelClose} size="4xl">
         <ModalContent>
           {(handleModelClose) => (
             <>
-              <ModalHeader className="flex justify-center pb-2 text-2xl font-bold ">
+              <ModalHeader className="flex justify-center pb-2 text-2xl font-bold">
                 {dayData?.date}
               </ModalHeader>
               <ModalBody className="pt-0">
-                <p className="flex justify-center text-xl font-semibold mb-6">
+                <p className="flex justify-center text-xl font-semibold mb-4">
                   {
                     daysOfWeek[
                       new Date(dayData?.date).getDay() as
@@ -108,11 +100,11 @@ export default function Home() {
                     ]
                   }
                 </p>
-                <div className="flex overflow-x-auto gap-6">
-                  {dayData?.hour?.map((hour: any, index: number) => (
+                <div className="flex overflow-x-auto gap-6 p-4">
+                  {dayData.hour.map((hour: any, index: number) => (
                     <div
                       key={index}
-                      className="flex flex-col items-center bg-gradient-to-r from-blue-50 to-blue-100 p-4 rounded-lg shadow-lg min-w-[120px] transform transition-transform hover:scale-105 hover:shadow-xl"
+                      className="flex flex-col items-center bg-gradient-to-r from-blue-200 to-blue-300 p-6 rounded-lg shadow-lg min-w-[120px] transform transition-transform hover:scale-110 "
                     >
                       <Image
                         src={hour.condition.icon}
@@ -136,7 +128,7 @@ export default function Home() {
                   color="primary"
                   variant="ghost"
                   onPress={handleModelClose}
-                  className="hover:bg-blue-100 transition-colors"
+                  className="hover:bg-blue-100 font-semibold"
                 >
                   Close
                 </Button>

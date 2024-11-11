@@ -52,8 +52,8 @@ export default function DayCard({ day, setDayData, onOpen }: DayCardProps) {
         </CardHeader>
         <CardBody className="overflow-visible py-2">
           <Image
-            alt="Card background"
-            className="object-cover rounded-xl"
+            alt={day.day.condition.text}
+            className=" rounded-xl"
             src={day.day.condition.icon}
             width={270}
           />
