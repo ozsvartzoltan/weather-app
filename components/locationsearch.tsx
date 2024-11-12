@@ -2,6 +2,7 @@ import { Input } from "@nextui-org/input";
 import { useEffect } from "react";
 import { SearchIcon } from "@/components/icons";
 import { siteConfig } from "@/config/site";
+import { Button } from "@nextui-org/button";
 
 interface Location {
   id: number;
@@ -82,19 +83,20 @@ export default function LocationSearch({
       )}
       {suggestions.length > 0 && (
         <div className="rounded-xl shadow-md mt-2 bg-default-100 ">
-          <ul className="p-0.5">
+          <ul className="p-0.5 ">
             {suggestions.map((location) => (
-              <li
-                key={location.id}
-                className="p-1 rounded-2xl hover:bg-default-200 my-1 cursor-pointer px-4"
-                onClick={() => {
-                  setCity(location);
-                  setSearch(location.name);
-                  setSuggestions([]);
-                  setShouldFetch(false);
-                }}
-              >
-                {location.name}, {location.region}, {location.country}
+              <li key={location.id} className=" ">
+                <Button
+                  className="w-full p-1 cursor-pointer px-4 rounded-2xl bg-default-100 hover:bg-default-200 text-left"
+                  onClick={() => {
+                    setCity(location);
+                    setSearch(location.name);
+                    setSuggestions([]);
+                    setShouldFetch(false);
+                  }}
+                >
+                  {location.name}, {location.region}, {location.country}
+                </Button>
               </li>
             ))}
           </ul>

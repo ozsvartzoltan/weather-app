@@ -28,13 +28,16 @@ export default function DayCard({ day, setDayData, onOpen }: DayCardProps) {
           </h1>
           <small>{day.date}</small>
           <div className="flex flex-col gap-2">
-            <div className="flex justify-center">
+            <div className="flex justify-center whitespace-pre-wrap">
               <div>
-                <span className="text-sm font-medium">min </span>
-                <span className="text-blue-600">{day.day.mintemp_c}°C</span>
+                <span className="text-sm font-medium ">min{"  "}</span>
+                <span className="text-blue-600">
+                  {day.day.mintemp_c}°C{"  "}
+                </span>
               </div>
+
               <div>
-                <span className="text-sm font-medium">max </span>
+                <span className="text-sm font-medium ">max {"  "}</span>
                 <span className="text-red-600">{day.day.maxtemp_c}°C</span>
               </div>
             </div>
