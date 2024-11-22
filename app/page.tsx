@@ -30,6 +30,7 @@ export default function Home() {
   const [data, setData] = useState<any>(null);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [dayData, setDayData] = useState<any>(null);
+  const [isOnline, setIsOnline] = useState<boolean>(true);
 
   useEffect(() => {
     if (city) {
@@ -52,6 +53,24 @@ export default function Home() {
     }
   }, [city]);
 
+  useEffect(() => {
+    setIsOnline(navigator.onLine);
+    const handleOnlineStatusChange = () => {
+      setIsOnline(navigator.onLine);
+    };
+
+    window.addEventListener("online", handleOnlineStatusChange);
+    window.addEventListener("offline", handleOnlineStatusChange);
+
+    const interval = setInterval(handleOnlineStatusChange, 5000);
+
+    return () => {
+      window.removeEventListener("online", handleOnlineStatusChange);
+      window.removeEventListener("offline", handleOnlineStatusChange);
+      clearInterval(interval);
+    };
+  }, []);
+
   function handleModelClose() {
     onOpenChange();
     setDayData(null);
@@ -59,6 +78,13 @@ export default function Home() {
 
   return (
     <section className="flex flex-col items-center justify-center gap-4 py-8">
+      {!isOnline && (
+        <div>
+          <p className="text-red-500">
+            You are currently offline. Please connect to the internet.
+          </p>
+        </div>
+      )}
       <LocationSearch
         loading={loading}
         search={search}
