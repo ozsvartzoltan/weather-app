@@ -8,7 +8,7 @@ interface DayCardsProps {
 
 export default function DayCards({ data, setDayData, onOpen }: DayCardsProps) {
   return (
-    <div className=" items-center mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4 p-4">
+    <div className=" items-center mt-4 grid grid-cols-1 lg:grid-cols-3 gap-4 p-4">
       {data.slice(0, 14).map((day: any) => (
         <DayCard
           day={day}
