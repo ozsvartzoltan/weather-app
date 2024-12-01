@@ -12,8 +12,7 @@ import {
 import { Image } from "@nextui-org/image";
 import DayCards from "@/components/daycards";
 import LocationSearch from "@/components/locationsearch";
-import { convertToMilitaryTime, daysOfWeek, siteConfig } from "@/config/site";
-import { env } from "process";
+import { convertToMilitaryTime, daysOfWeek } from "@/config/site";
 
 interface Location {
   id: number;
@@ -36,7 +35,7 @@ export default function Home() {
   useEffect(() => {
     if (city) {
       fetch(
-        `https://api.weatherapi.com/v1/forecast.json?key=${process.env.WEATHER_API_KEY}&q=${city.name}&days=14&lang=en`,
+        `https://api.weatherapi.com/v1/forecast.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${city.name}&days=14&lang=en`,
         {
           method: "GET",
           headers: {
@@ -55,6 +54,8 @@ export default function Home() {
   }, [city]);
 
   useEffect(() => {
+    console.log(process.env.NEXT_PUBLIC_WEATHER_API_KEY);
+
     setIsOnline(navigator.onLine);
     const handleOnlineStatusChange = () => {
       setIsOnline(navigator.onLine);

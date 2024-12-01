@@ -1,7 +1,6 @@
 import { Input } from "@nextui-org/input";
 import { useEffect } from "react";
 import { SearchIcon } from "@/components/icons";
-import { siteConfig } from "@/config/site";
 import { Button } from "@nextui-org/button";
 
 interface Location {
@@ -38,7 +37,7 @@ export default function LocationSearch({
     if (shouldFetch && search.length > 2) {
       setLoading(true);
       fetch(
-        `https://api.weatherapi.com/v1/search.json?key=${process.env.WEATHER_API_KEY}&q=${search}&lang=en`,
+        `https://api.weatherapi.com/v1/search.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${search}&lang=en`,
         {
           method: "GET",
           headers: {
