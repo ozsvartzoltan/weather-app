@@ -38,7 +38,7 @@ export default function LocationSearch({
     if (shouldFetch && search.length > 2) {
       setLoading(true);
       fetch(
-        `https://api.weatherapi.com/v1/search.json?key=${siteConfig.API_key}&q=${search}&lang=en`,
+        `https://api.weatherapi.com/v1/search.json?key=${process.env.WEATHER_API_KEY}&q=${search}&lang=en`,
         {
           method: "GET",
           headers: {
