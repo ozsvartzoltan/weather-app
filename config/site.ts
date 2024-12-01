@@ -65,7 +65,6 @@ export const siteConfig = {
     linkedin: "https://www.linkedin.com/in/zoltan-florian-ozsvart-1586681aa/",
     weatherapi: "https://www.weatherapi.com/",
   },
-  API_key: "6da08b5b980045bfadb121929240711",
 };
 
 export const daysOfWeek = {

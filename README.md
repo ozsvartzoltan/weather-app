@@ -1,3 +1,5 @@
+https://weather-app-git-master-zoltans-projects-085511d0.vercel.app/
+
 # Next.js & NextUI Template
 
 This is a template for creating applications using Next.js 14 (app directory) and NextUI (v2).
